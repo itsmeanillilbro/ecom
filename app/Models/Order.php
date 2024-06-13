@@ -17,6 +17,7 @@ class order extends Model
         'status',
         'currency',
         'shipping_amount',
+        'shipping_method',
         'notes'
 
     ];
@@ -25,7 +26,7 @@ class order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function items(){
+    public function itemss(){
         return $this->hasMany(Orderitem::class);
 
     }

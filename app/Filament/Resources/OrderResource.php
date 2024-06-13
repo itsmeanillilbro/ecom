@@ -5,13 +5,29 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
 use App\Models\Order;
+use App\Models\Product;
 use Filament\Forms;
+use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Number;
+use NunoMaduro\Collision\Adapters\Phpunit\State;
 
 class OrderResource extends Resource
 {
@@ -23,29 +39,136 @@ class OrderResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('user_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('grand_total')
-                    ->numeric()
-                    ->default(null),
-                Forms\Components\TextInput::make('payment_method')
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('payment_status')
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('status')
-                    ->required(),
-                Forms\Components\TextInput::make('currency')
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('shipping_amount')
-                    ->numeric()
-                    ->default(null),
-                Forms\Components\TextInput::make('notes')
-                    ->maxLength(255)
-                    ->default(null),
+                Group::make()->schema([
+                    Section::make('Order')->schema([
+                        Select::make('user_id')
+                            ->label('Customer')
+                            ->required()
+                            ->relationship('user', 'name'),
+
+                        Select::make('payment_method')
+                            ->options([
+                                'stripe' => 'Stripe',
+                                'cod' => 'Cash on Delivery'
+                            ])
+                            ->required(),
+
+                        Select::make('payment_status')
+                            ->options([
+                                'pending' => 'Pending',
+                                'paid' => 'Paid',
+                                'failed' => 'Failed'
+                            ])
+                            ->default('pending')
+                            ->required(),
+
+
+                        ToggleButtons::make('status')
+                            ->inline()
+                            ->default('new')
+                            ->options([
+                                'new' => 'New',
+                                'processing' => 'Processing',
+                                'shipped' => 'Shipped',
+                                'delivered' => 'Delivered',
+                                'canceled' => 'Cancelled'
+                            ])
+                            ->colors([
+                                'new' => 'info',
+                                'shipped' => 'success',
+                                'delivered' => 'success',
+                                'canceled' => 'danger'
+
+                            ])
+
+                            ->icons([
+                                'new' => 'heroicon-o-sparkles',
+                                'processing' => 'heroicon-o-arrow-path',
+                                'shipped' => 'heroicon-o-truck',
+                                'delivered' => 'heroicon-o-check-badge',
+                                'canceled' => 'heroicon-o-x-circle'
+                            ]),
+
+                        Select::make('currency')
+                            ->required()
+                            ->options([
+                                'NPR',
+                                'INR',
+                                'USD'
+                            ])
+                            ->default('NPR'),
+
+                        Select::make('shipping_method')
+                            ->required()
+                            ->options([
+                                'pathao' => 'Pathao',
+                                'indrive' => 'InDrive',
+                            ]),
+
+                        Textarea::make('notes')
+                            ->columnSpanFull()
+                    ])->columns(2),
+
+                    Section::make('Order Items')->schema([
+                        Repeater::make('itemss')
+                            ->label('Items')
+                            ->relationship()
+                            ->schema([
+                                Select::make('product_id')
+                                    ->relationship('product', 'name')
+                                    ->searchable()
+                                    ->preload()
+                                    ->required()
+                                    ->distinct()
+                                    ->reactive()
+                                    ->columnSpan(4)
+                                    ->afterStateUpdated(fn($state, Set $set) => $set('unit_amount', Product::find($state)?->price ?? 0))
+                                    ->afterStateUpdated(fn($state, Set $set) => $set('total_amount', Product::find($state)?->price ?? 0))
+
+                                    ->disableOptionsWhenSelectedInSiblingRepeaterItems(),
+
+                                TextInput::make('quantity')
+                                    ->required()
+                                    ->numeric()
+                                    ->columnSpan(2)
+                                    ->default(1)
+                                    ->reactive()
+                                    ->afterStateUpdated(fn($state, Set $set, Get $get) => $set('total_amount', $state * $get('unit_amount')))
+                                    ->minValue(1),
+
+                                TextInput::make('unit_amount')
+                                    ->numeric()
+                                    ->required()
+                                    ->columnSpan(2)
+                                    ->dehydrated()
+                                    ->disabled(),
+
+                                TextInput::make('total_amount')
+                                    ->numeric()
+                                    ->required()
+                                    ->dehydrated()
+                                    ->columnSpan(2)
+                            ])->columns(10),
+
+                            Placeholder::make('grand_total_placeholder')
+                            ->label('Grand Total')
+                            ->content(function(Get $get, Set $set){
+                                $total = 0;
+                                if(!$repeaters=$get('itemss')){
+                                    return $total;
+                                }
+
+                                foreach($repeaters as $key => $repeater){
+                                    $total += $get("itemss.{$key}.total_amount");
+                                }
+                                $set('grand_total', $total);
+                                return Number::currency($total, 'NPR');
+                            }),
+
+                            Hidden::make('grand_total')
+                            ->default(0)
+                    ])->columnSpanFull()
+                ])->columnSpanFull()
             ]);
     }
 
@@ -53,32 +176,7 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('grand_total')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('payment_method')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('payment_status')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('status'),
-                Tables\Columns\TextColumn::make('currency')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('shipping_amount')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('notes')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+
             ])
             ->filters([
                 //

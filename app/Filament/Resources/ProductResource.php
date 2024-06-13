@@ -5,6 +5,10 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Group;
@@ -18,6 +22,7 @@ use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -37,12 +42,12 @@ class ProductResource extends Resource
                     Section::make('Product Information')->schema([
                         TextInput::make('name')
                             ->required()
-                            ->live(onBlur:true)
-                            ->afterStateUpdated(function(string $operation, $state, Set $set ){
-                                if($operation!=='create'){
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(function (string $operation, $state, Set $set) {
+                                if ($operation !== 'create') {
                                     return;
                                 }
-                                $set('slug',Str::slug($state));
+                                $set('slug', Str::slug($state));
                             })
                             ->maxLength(255),
 
@@ -51,7 +56,7 @@ class ProductResource extends Resource
                             ->maxLength(255)
                             ->disabled()
                             ->dehydrated()
-                            ->unique(Product::class, 'slug' , ignoreRecord:true),
+                            ->unique(Product::class, 'slug', ignoreRecord: true),
 
                         MarkdownEditor::make('description')
                             ->columnSpanFull()
@@ -62,7 +67,7 @@ class ProductResource extends Resource
 
                     Section::make('Images Information')->schema([
                         FileUpload::make('images')
-                        ->image()
+                            ->image()
                             ->multiple()
                             ->maxFiles(10)
                             ->directory('uploads/products')
@@ -127,20 +132,16 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
 
-                TextColumn::make('categories.name')
-                ->searchable()
-                ->sortable(),
+                TextColumn::make('category.name')
+                    ->searchable()
+                    ->sortable(),
 
 
                 Tables\Columns\TextColumn::make('brand.name')
                     ->searchable()
                     ->sortable(),
-
-
-                Tables\Columns\TextColumn::make('images')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('price')
-                    ->money()
+                    ->money("NPR")
                     ->sortable(),
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
@@ -160,10 +161,19 @@ class ProductResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('category')
+                    ->relationship('category', 'name'),
+
+                SelectFilter::make('brands')
+                    ->relationship('brand', 'name'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+            ActionGroup::make([
+                   ViewAction::make(),
+                   EditAction::make(),
+                    DeleteAction::make()
+                ])
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
