@@ -4,8 +4,10 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
+use App\Filament\Resources\OrderResourcesResource\RelationManagers\AddressRelationManager;
 use App\Models\Order;
 use App\Models\Product;
+use Filament\Actions\ActionGroup;
 use Filament\Forms;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Hidden;
@@ -22,6 +24,9 @@ use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -140,8 +145,9 @@ class OrderResource extends Resource
                                     ->numeric()
                                     ->required()
                                     ->columnSpan(2)
+                                    ->disabled()
                                     ->dehydrated()
-                                    ->disabled(),
+                                    ,
 
                                 TextInput::make('total_amount')
                                     ->numeric()
@@ -150,22 +156,22 @@ class OrderResource extends Resource
                                     ->columnSpan(2)
                             ])->columns(10),
 
-                            Placeholder::make('grand_total_placeholder')
+                        Placeholder::make('grand_total_placeholder')
                             ->label('Grand Total')
-                            ->content(function(Get $get, Set $set){
+                            ->content(function (Get $get, Set $set) {
                                 $total = 0;
-                                if(!$repeaters=$get('itemss')){
+                                if (!$repeaters = $get('itemss')) {
                                     return $total;
                                 }
 
-                                foreach($repeaters as $key => $repeater){
+                                foreach ($repeaters as $key => $repeater) {
                                     $total += $get("itemss.{$key}.total_amount");
                                 }
                                 $set('grand_total', $total);
                                 return Number::currency($total, 'NPR');
                             }),
 
-                            Hidden::make('grand_total')
+                        Hidden::make('grand_total')
                             ->default(0)
                     ])->columnSpanFull()
                 ])->columnSpanFull()
@@ -177,12 +183,60 @@ class OrderResource extends Resource
         return $table
             ->columns([
 
+                TextColumn::make('user.name')
+                    ->label('Customer')
+                    ->searchable()
+                    ->sortable(),
+
+                TextColumn::make('payment_method')
+                ->searchable()
+                ->sortable(),
+
+                TextColumn::make('payment_status')
+                ->searchable()
+                ->sortable(),
+
+
+                TextColumn::make('grand_total')
+                ->searchable()
+                ->sortable()
+                ->money('NPR'),
+
+                SelectColumn::make('status')
+                ->options([
+                    'new'=>'New',
+                    'processing'=>'Processing',
+                    'delivered'=>'Delivered',
+                    'shipped'=>'Shipped',
+                    'canceled'=>'Canceled',
+                ])
+
+                ->searchable()
+                ->sortable(),
+
+                TextColumn::make('created_at')
+                ->dateTime()
+                ->toggleable()
+                ->toggleable(isToggledHiddenByDefault: true),
+
+                TextColumn::make('updated_at')
+                ->dateTime()
+                ->toggleable()
+                ->toggleable(isToggledHiddenByDefault: true),
+
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                \Filament\Tables\Actions\ActionGroup::make([
+
+                    ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
+                    DeleteAction::make()
+
+                ])
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -191,12 +245,26 @@ class OrderResource extends Resource
             ]);
     }
 
+
+    public static function getNavigationBadge(): ?string{
+
+        return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): string | array | null{
+        return static::getmodel()::count()>10?'success' : 'danger';
+    }
+
+
+
     public static function getRelations(): array
     {
         return [
-            //
+            AddressRelationManager::class
         ];
     }
+
+
 
     public static function getPages(): array
     {
