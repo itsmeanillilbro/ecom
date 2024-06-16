@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\Product;
 use Filament\Actions\ActionGroup;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Placeholder;
@@ -44,6 +45,8 @@ class OrderResource extends Resource
     {
         return $form
             ->schema([
+
+
                 Group::make()->schema([
                     Section::make('Order')->schema([
                         Select::make('user_id')
@@ -172,10 +175,13 @@ class OrderResource extends Resource
                             }),
 
                         Hidden::make('grand_total')
-                            ->default(0)
+                            ->default(0),
+
+
                     ])->columnSpanFull()
                 ])->columnSpanFull()
             ]);
+
     }
 
     public static function table(Table $table): Table
@@ -264,14 +270,13 @@ class OrderResource extends Resource
         ];
     }
 
-
-
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListOrders::route('/'),
             'create' => Pages\CreateOrder::route('/create'),
             'edit' => Pages\EditOrder::route('/{record}/edit'),
+
         ];
     }
 }

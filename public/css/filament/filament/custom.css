@@ -1,0 +1,9 @@
+/* Custom styles for Filament tabs */
+.filament-tabs {
+    font-size: 12px; /* Smaller font size */
+}
+
+.filament-tabs .filament-tabs-item {
+    margin: 2px; /* Lesser margin */
+    padding: 4px; /* Lesser padding */
+}
