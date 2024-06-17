@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Filament\Resources\OrderResourcesResource\RelationManagers;
+namespace App\Filament\Resources\OrderResource\RelationManagers;
+
 
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
@@ -89,8 +90,6 @@ class AddressRelationManager extends RelationManager
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
-
-
 
     }
 

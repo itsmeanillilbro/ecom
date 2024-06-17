@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
 use App\Filament\Resources\OrderResourcesResource\RelationManagers\AddressRelationManager;
+use App\Filament\Resources\UserResource\RelationManagers\OrdersRelationManager;
 use App\Models\Order;
 use App\Models\Product;
 use Filament\Actions\ActionGroup;
@@ -40,7 +41,7 @@ class OrderResource extends Resource
     protected static ?string $model = Order::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    protected static ?int $navigationSort = 4;
     public static function form(Form $form): Form
     {
         return $form
@@ -150,7 +151,7 @@ class OrderResource extends Resource
                                     ->columnSpan(2)
                                     ->disabled()
                                     ->dehydrated()
-                                    ,
+                                ,
 
                                 TextInput::make('total_amount')
                                     ->numeric()
@@ -195,40 +196,40 @@ class OrderResource extends Resource
                     ->sortable(),
 
                 TextColumn::make('payment_method')
-                ->searchable()
-                ->sortable(),
+                    ->searchable()
+                    ->sortable(),
 
                 TextColumn::make('payment_status')
-                ->searchable()
-                ->sortable(),
+                    ->searchable()
+                    ->sortable(),
 
 
                 TextColumn::make('grand_total')
-                ->searchable()
-                ->sortable()
-                ->money('NPR'),
+                    ->searchable()
+                    ->sortable()
+                    ->money('NPR'),
 
                 SelectColumn::make('status')
-                ->options([
-                    'new'=>'New',
-                    'processing'=>'Processing',
-                    'delivered'=>'Delivered',
-                    'shipped'=>'Shipped',
-                    'canceled'=>'Canceled',
-                ])
+                    ->options([
+                        'new' => 'New',
+                        'processing' => 'Processing',
+                        'delivered' => 'Delivered',
+                        'shipped' => 'Shipped',
+                        'canceled' => 'Canceled',
+                    ])
 
-                ->searchable()
-                ->sortable(),
+                    ->searchable()
+                    ->sortable(),
 
                 TextColumn::make('created_at')
-                ->dateTime()
-                ->toggleable()
-                ->toggleable(isToggledHiddenByDefault: true),
+                    ->dateTime()
+                    ->toggleable()
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('updated_at')
-                ->dateTime()
-                ->toggleable()
-                ->toggleable(isToggledHiddenByDefault: true),
+                    ->dateTime()
+                    ->toggleable()
+                    ->toggleable(isToggledHiddenByDefault: true),
 
             ])
             ->filters([
@@ -252,13 +253,15 @@ class OrderResource extends Resource
     }
 
 
-    public static function getNavigationBadge(): ?string{
+    public static function getNavigationBadge(): ?string
+    {
 
         return static::getModel()::count();
     }
 
-    public static function getNavigationBadgeColor(): string | array | null{
-        return static::getmodel()::count()>10?'success' : 'danger';
+    public static function getNavigationBadgeColor(): string|array|null
+    {
+        return static::getmodel()::count() > 10 ? 'success' : 'danger';
     }
 
 
@@ -266,7 +269,7 @@ class OrderResource extends Resource
     public static function getRelations(): array
     {
         return [
-            AddressRelationManager::class
+            \App\Filament\Resources\OrderResource\RelationManagers\AddressRelationManager::class
         ];
     }
 
@@ -276,7 +279,7 @@ class OrderResource extends Resource
             'index' => Pages\ListOrders::route('/'),
             'create' => Pages\CreateOrder::route('/create'),
             'edit' => Pages\EditOrder::route('/{record}/edit'),
-
+            'view' => Pages\ViewOrder::route('/{record}'),
         ];
     }
 }

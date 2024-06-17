@@ -33,7 +33,8 @@ class ProductResource extends Resource
     protected static ?string $model = Product::class;
 
     protected static ?string $navigationIcon = 'fab-product-hunt';
-
+    protected static ?string $recordTitleAttribute = 'name';
+    protected static ?int $navigationSort = 3;
     public static function form(Form $form): Form
     {
         return $form
@@ -197,4 +198,6 @@ class ProductResource extends Resource
             'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
     }
+
+
 }
