@@ -19,6 +19,8 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'fas-list';
 
+    protected static ?string $recordTitleAttribute = 'name';
+    protected static ?int $navigationSort = 2;
     public static function form(Form $form): Form
     {
         return $form
@@ -84,4 +86,5 @@ class CategoryResource extends Resource
             'edit' => Pages\EditCategory::route('/{record}/edit'),
         ];
     }
+
 }
