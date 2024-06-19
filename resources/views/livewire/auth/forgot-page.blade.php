@@ -1,3 +1,4 @@
+<div>
 <div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto">
   <div class="flex h-full items-center">
     <main class="w-full max-w-md mx-auto p-6">
@@ -40,4 +41,5 @@
       </div>
     </main>
   </div>
+</div>
 </div>

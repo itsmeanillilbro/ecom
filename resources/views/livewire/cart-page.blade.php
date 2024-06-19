@@ -1,3 +1,4 @@
+<div>
 <div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto">
   <div class="container mx-auto px-4">
     <h1 class="text-2xl font-semibold mb-4">Shopping Cart</h1>
@@ -58,9 +59,10 @@
             <span class="font-semibold">Total</span>
             <span class="font-semibold">$21.98</span>
           </div>
-          <button class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">Checkout</button>
+          <button class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full"  >Checkout</button>
         </div>
       </div>
     </div>
   </div>
+</div>
 </div>
