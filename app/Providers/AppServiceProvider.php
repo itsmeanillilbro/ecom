@@ -4,6 +4,7 @@ namespace App\Providers;
 
 
 use App\Http\Middleware\Cors;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 

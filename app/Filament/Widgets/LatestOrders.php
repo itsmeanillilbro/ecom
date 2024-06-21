@@ -40,6 +40,7 @@ class LatestOrders extends BaseWidget
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
                         'new' => 'info',
+                        'processing'=>'warning',
                         'shipped' => 'success',
                         'delivered' => 'success',
                         'canceled' => 'danger'

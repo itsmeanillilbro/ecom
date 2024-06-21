@@ -131,6 +131,7 @@ class ProductResource extends Resource
             ->columns([
 
                 Tables\Columns\TextColumn::make('name')
+                ->limit(80)
                     ->searchable(),
 
                 TextColumn::make('category.name')
