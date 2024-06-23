@@ -45,8 +45,8 @@ class Product extends Model
 
     public function delete()
     {
-        if (!empty($this->image)) {
-            Storage::disk('public')->delete($this->image);
+        if (!empty($this->images)) {
+            Storage::disk('public')->delete($this->images);
         }
         parent::delete();
     }

@@ -42,6 +42,7 @@ class CategoryResource extends Resource
                     ->maxLength(255)
                 ,
                 Forms\Components\FileUpload::make('image')
+                ->directory('uploads/categories')
                     ->image(),
                 Forms\Components\Toggle::make('is_active')
                     ->required(),

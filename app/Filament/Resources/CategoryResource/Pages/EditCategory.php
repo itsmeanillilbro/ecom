@@ -17,9 +17,9 @@ class EditCategory extends EditRecord
         ];
     }
 
-
-    protected function getRedirectUrl(): string
+protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');
     }
+
 }

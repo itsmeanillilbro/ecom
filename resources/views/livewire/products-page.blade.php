@@ -14,7 +14,7 @@
 
                                     <li class="mb-4" wire:key="{{$category->id}}" >
                                         <label for="{{$category->slug}}" class="flex items-center dark:text-gray-400 ">
-                                            <input type="checkbox" class="w-4 h-4 mr-2" id="{{$category->slug}}" >
+                                            <input type="checkbox" wire:model.live="categories_select"  class="w-4 h-4 mr-2" id="{{$category->slug}}" >
                                             <span class="text-lg">{{$category->name}}</span>
                                         </label>
                                     </li>
@@ -29,7 +29,7 @@
                                 @foreach ($brands as $brand)
                                     <li class="mb-4" wire:key="{{$brand->id}}">
                                         <label for="{{$brand->slug}}" class="flex items-center dark:text-gray-300">
-                                            <input type="checkbox" class="w-4 h-4 mr-2" id="{{$brand->slug}}" >
+                                            <input type="checkbox" wire:model.live="brands_select"   id="{{$brand->slug}}" class="w-4 h-4 mr-2">
                                             <span class="text-lg dark:text-gray-400">{{$brand->name}}</span>
                                         </label>
                                     </li>

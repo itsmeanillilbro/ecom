@@ -70,10 +70,13 @@ class ProductResource extends Resource
                         FileUpload::make('images')
                             ->image()
                             ->multiple()
-                            ->maxFiles(10)
+                            ->maxFiles(4)
+
                             ->directory('uploads/products')
                             ->columnSpan(2)
-                            ->reorderable(),
+                            ->enableReordering()
+
+                            ,
                     ])->columns(2)
                 ])->columnSpan(2),
 

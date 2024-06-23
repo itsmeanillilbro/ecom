@@ -16,6 +16,7 @@ class EditBrand extends EditRecord
     {
         return [
             Actions\DeleteAction::make(),
+
         ];
 
     }

@@ -1,3 +1,9 @@
 @tailwind base;
+
+@layer base {
+    code {
+     text-wrap: wrap;
+    }
+  }
 @tailwind components;
 @tailwind utilities;
