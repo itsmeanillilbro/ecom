@@ -21,7 +21,7 @@ Route::get('/',HomePage::class);
 
 Route::get('/categories', CategoriesPage::class);
 Route::get('/products', ProductsPage::class);
-Route::get('/products/{slug}', ProductDetailPage::class );
+Route::get('/products/{slug}', ProductDetailPage::class )->name('products');
 Route::get('/cart', CartPage::class );
 Route::get('/checkout', CheckoutPage::class );
 Route::get('/my-orders', MyOrdersPage::class );
