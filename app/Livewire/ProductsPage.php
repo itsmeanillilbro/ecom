@@ -31,35 +31,36 @@ class ProductsPage extends Component
     public $sort = 'latest';
     public $pricee = 300000;
 
-      public function isProductInCart($product_id)
-    {
-        $cart_items = CartManagement::getCartItemsFromCookie();
-        foreach ($cart_items as $item) {
-            if ($item['product_id'] == $product_id) {
-                return true;
-            }
-        }
-        return false;
-    }
+    //   public function isProductInCart($product_id)
+    // {
+    //     $cart_items = CartManagement::getCartItemsFromCookie();
+    //     foreach ($cart_items as $item) {
+    //         if ($item['product_id'] == $product_id) {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
 
     public function addToCart($product_id) {
-        if ($this->isProductInCart($product_id)) {
+        // if ($this->isProductInCart($product_id)) {
 
-          $this->alert('info', 'Product already in your cart!', [
-            'position' => 'top-end',
-            'toast' => true,
-            'timer' => 3000
-          ]);
-        } else {
+        //   $this->alert('info', 'Product already in your cart!', [
+        //     'position' => 'top-end',
+        //     'toast' => true,
+        //     'timer' => 3000
+        //   ]);
+        // } else {
 
           $total_count = CartManagement::addItemsToCart($product_id);
           $this->dispatch('update-cart-count', total_count:$total_count)->to(Header::class);
           $this->alert('success', 'Product added successfully', [
             'position' => 'top-end',
-            'toast'=>true,
-            'timer'=>3000
+            'toast' => true,
+            'timerProgressBar' => true,
+            'timer' => 3000,
           ]);
-        }
+        // }
       }
 
 
