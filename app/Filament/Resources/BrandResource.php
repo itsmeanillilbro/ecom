@@ -77,7 +77,7 @@ class BrandResource extends Resource
                     Tables\Actions\ViewAction::make(),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make()
-                    ->action(fn () => redirect()->route('index')),
+                   ,
                 ])
             ])
             ->bulkActions([
