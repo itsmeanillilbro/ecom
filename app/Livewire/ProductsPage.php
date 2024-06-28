@@ -7,11 +7,14 @@ use App\Livewire\Partials\Header;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+#[Title('Products - Prakriti Store')]
 class ProductsPage extends Component
 {
     use LivewireAlert;
@@ -51,6 +54,9 @@ class ProductsPage extends Component
         //     'timer' => 3000
         //   ]);
         // } else {
+            if (!Auth::check()) {
+                return redirect()->route('login');
+            }
 
           $total_count = CartManagement::addItemsToCart($product_id);
           $this->dispatch('update-cart-count', total_count:$total_count)->to(Header::class);

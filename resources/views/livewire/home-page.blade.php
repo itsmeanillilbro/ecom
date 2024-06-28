@@ -5,10 +5,10 @@
             <!-- Grid -->
             <div class="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
                 <div>
-                    <h1 class="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight ">Start
-                        your journey with <span class="text-blue-600">DCodeMania</span></h1>
+                    <h1 class="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-5xl lg:leading-tight ">Start
+                        your journey with <span class="text-blue-600">Prakriti's Store</span></h1>
                     <p class="mt-3 text-lg text-gray-800 dark:text-gray-400">Purchase wide varities of electronics
-                        products like Smartphones, Laptops, Smartwatches, Television and many more.</p>
+                        products, clothing products and many more.</p>
 
                     <!-- Buttons -->
                     <div class="mt-7 grid gap-3 w-full sm:inline-flex">
@@ -21,10 +21,7 @@
                                 <path d="m9 18 6-6-6-6" />
                             </svg>
                         </a>
-                        <a class="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            href="/contact">
-                            Contact sales team
-                        </a>
+
                     </div>
                     <!-- End Buttons -->
 
@@ -158,8 +155,8 @@
                 <!-- End Col -->
 
                 <div class="relative ms-4">
-                    <img class="w-full rounded-md"
-                        src="https://static.vecteezy.com/system/resources/previews/011/993/278/non_2x/3d-render-online-shopping-bag-using-credit-card-or-cash-for-future-use-credit-card-money-financial-security-on-mobile-3d-application-3d-shop-purchase-basket-retail-store-on-e-commerce-free-png.png"
+                    <img class="w-4/5 rounded-md hidden lg:block"
+                        src="{{asset('images/taylor1.png')}}"
                         alt="Image Description">
                     <div
                         class="absolute inset-0 -z-[1] bg-gradient-to-tr from-gray-200 via-white/0 to-white/0 w-full h-full rounded-md mt-4 -mb-4 me-4 -ms-4 lg:mt-6 lg:-mb-6 lg:me-6 lg:-ms-6 dark:from-slate-800 dark:via-slate-900/0 dark:to-slate-900/0">
@@ -200,11 +197,11 @@
 
     <!-- brand-section -->
 
-    <section class="py-20">
+    <section class="py-16">
         <div class="max-w-xl mx-auto">
             <div class="text-center ">
                 <div class="relative flex flex-col items-center">
-                    <h1 class="text-5xl font-bold "> Browse Popular<span class="text-blue-500"> Brands
+                    <h1 class="text-5xl font-bold ">Popular<span class="text-blue-500"> Brands
                         </span> </h1>
                     <div class="flex w-40 mt-2 mb-6 overflow-hidden rounded">
                         <div class="flex-1 h-2 bg-blue-200">
@@ -216,9 +213,7 @@
                     </div>
                 </div>
                 <p class="mb-12 text-base text-center text-gray-500">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus magni eius eaque?
-                    Pariatur
-                    numquam, odio quod nobis ipsum ex cupiditate?
+                "Browse Our Popular Brands and Get Exciting Deals"
                 </p>
             </div>
         </div>
@@ -246,11 +241,11 @@
 
     <!-- Categories-section -->
 
-    <div class="bg-orange-200 py-20">
+    <div class="bg-orange-200 py-16">
         <div class="max-w-xl mx-auto">
             <div class="text-center ">
                 <div class="relative flex flex-col items-center">
-                    <h1 class="text-5xl font-bold"> Browse <span class="text-blue-500"> Categories
+                    <h1 class="text-5xl font-bold"> Our <span class="text-blue-500"> Categories
                         </span> </h1>
                     <div class="flex w-40 mt-2 mb-6 overflow-hidden rounded">
                         <div class="flex-1 h-2 bg-blue-200">
@@ -262,9 +257,7 @@
                     </div>
                 </div>
                 <p class="mb-12 text-base text-center text-gray-500">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus magni eius eaque?
-                    Pariatur
-                    numquam, odio quod nobis ipsum ex cupiditate?
+                "Explore, Discover, and Enjoy Our Varied Categories"
                 </p>
             </div>
         </div>
@@ -310,7 +303,7 @@
 
 
     <!-- customer-review section -->
-    <section class="py-14 font-poppins">
+    <section class="py-10 font-poppins">
         <div class="max-w-6xl px-4 py-6 mx-auto lg:py-4 md:px-6">
             <div class="max-w-xl mx-auto">
                 <div class="text-center ">
@@ -327,9 +320,7 @@
                         </div>
                     </div>
                     <p class="mb-12 text-base text-center text-gray-500">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus magni eius eaque?
-                        Pariatur
-                        numquam, odio quod nobis ipsum ex cupiditate?
+                    "See What Our Customers Are Saying"
                     </p>
                 </div>
             </div>
@@ -345,7 +336,7 @@
                             </div>
                             <div>
                                 <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-300">
-                                    Adren Roy</h2>
+                                    Punit Maharjan</h2>
                                 <p class="text-xs text-gray-500 dark:text-gray-400">Web Designer</p>
                             </div>
                         </div>
@@ -353,8 +344,8 @@
                         </p>
                     </div>
                     <p class="px-6 mb-6 text-base text-gray-500 dark:text-gray-400">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem cupiditate similique,
-                        iure minus sed fugit obcaecati minima quam reiciendis dicta!
+                    "This e-commerce store offers a user-friendly and intuitive shopping experience.
+                    The website is well-organized and easy to navigate, allowing customers to find the products they're looking for quickly and efficiently."
                     </p>
                     <div class="flex flex-wrap justify-between pt-4 border-t dark:border-gray-700">
                         <div class="flex px-6 mb-2 md:mb-0">
@@ -453,7 +444,7 @@
                             </div>
                             <div>
                                 <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-300">
-                                    Sonira Roy</h2>
+                                    Saral Maharjan</h2>
                                 <p class="text-xs text-gray-500 dark:text-gray-400">Manager</p>
                             </div>
                         </div>
@@ -461,8 +452,7 @@
                         </p>
                     </div>
                     <p class="px-6 mb-6 text-base text-gray-500 dark:text-gray-400">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem cupiditate similique,
-                        iure minus sed fugit obcaecati minima quam reiciendis dicta!
+                        "Ta ta bro ta ta"
                     </p>
                     <div class="flex flex-wrap justify-between pt-4 border-t dark:border-gray-700">
                         <div class="flex px-6 mb-2 md:mb-0">
@@ -559,7 +549,7 @@
                             </div>
                             <div>
                                 <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-300">
-                                    William harry</h2>
+                                    Ram</h2>
                                 <p class="text-xs text-gray-500 dark:text-gray-400">Marketing Officer</p>
                             </div>
                         </div>
@@ -665,7 +655,7 @@
                             </div>
                             <div>
                                 <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-300">
-                                    James jack</h2>
+                                   Hari</h2>
                                 <p class="text-xs text-gray-500 dark:text-gray-400">Java Programmer</p>
                             </div>
                         </div>

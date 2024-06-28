@@ -64,7 +64,7 @@
                                     <span>{{Number::currency($product->price, 'NPR')}}</span>
 
                                 </p>
-                                <p class="max-w-md text-gray-700 dark:text-gray-400 break-all " >
+                                <p class="max-w-md text-gray-700 dark:text-white break-all " >
                                     {!! Str::markdown($product->description) !!}
                                 </p>
                             </div>

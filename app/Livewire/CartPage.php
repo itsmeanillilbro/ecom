@@ -12,7 +12,7 @@ class CartPage extends Component
 {
 
     use LivewireAlert;
-    #[Title('Cart - DarazLite')]
+    #[Title('Cart - Prakriti Store')]
     public $cart_items = [];
     public $grand_total;
 

@@ -60,7 +60,7 @@ class UserResource extends Resource
                 ->date()
                 ->searchable()
                 ->sortable()
-                ->toggleable()
+                ->toggleable(isToggledHiddenByDefault:true)
             ])
             ->filters([
                 //

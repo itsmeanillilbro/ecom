@@ -16,7 +16,7 @@ class ResetPasswordPage extends Component
 {
     use LivewireAlert;
 
-    #[Title('Reset Password - Daraz Lite')]
+    #[Title('Reset Password - Prakriti Store')]
     public $password;
     public $password_confirmation;
     public $token;

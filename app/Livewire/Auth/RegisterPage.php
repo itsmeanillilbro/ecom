@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class RegisterPage extends Component
 {
-    #[Title('Register')]
+    #[Title('Register - Prakriti Store')]
 
     public $name;
     public $email;

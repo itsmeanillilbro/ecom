@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class ForgotPage extends Component
 {
-    #[Title('Forget Password - DarazLite')]
+    #[Title('Forget Password - Prakriti Store')]
 
     public $email;
 public function save(){

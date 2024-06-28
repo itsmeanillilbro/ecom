@@ -1,6 +1,7 @@
 <?php
 
 use App\Filament\Resources\ProductResource;
+use App\Helpers\CartManagement;
 use App\Livewire\Auth\ForgotPage;
 use App\Livewire\Auth\LoginPage;
 use App\Livewire\Auth\RegisterPage;
@@ -39,6 +40,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/logout', function () {
         auth()->logout();
+        CartManagement::clearCartItems();
         return redirect('/');
     });
     Route::get('/checkout', CheckoutPage::class);

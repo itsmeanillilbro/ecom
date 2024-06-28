@@ -9,7 +9,7 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-#[Title('Product details-Daraz Lite')]
+#[Title('Product details - Prakriti Store')]
 class ProductDetailPage extends Component
 {
     public $slug;

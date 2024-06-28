@@ -2,7 +2,9 @@
 
 namespace App\Helpers;
 
+use App\Models\order;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 
 class CartManagement
@@ -98,6 +100,7 @@ class CartManagement
     static public function clearCartItems()
     {
         Cookie::queue(Cookie::forget('cart_items'));
+
     }
 
     static public function getCartItemsFromCookie()
@@ -141,4 +144,5 @@ class CartManagement
     static public function grandTotal($items){
         return array_sum(array_column($items, 'total_amount'));
     }
+
 }

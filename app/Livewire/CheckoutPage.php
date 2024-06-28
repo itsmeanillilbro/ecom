@@ -14,7 +14,7 @@ use Stripe\Stripe;
 
 class CheckoutPage extends Component
 {
-    #[Title('Checkout - Daraz Lite')]
+    #[Title('Checkout -Prakriti Store')]
 
     public $first_name, $last_name, $phone, $city, $state, $zip_code, $payment_method, $street_address;
 

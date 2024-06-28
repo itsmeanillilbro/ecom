@@ -11,7 +11,7 @@ use Stripe\Stripe;
 
 class SuccessPage extends Component
 {
-    #[Title('Success - DarazLite')]
+    #[Title('Success - Prakriti Store')]
 
     #[Url]
     public $session_id;

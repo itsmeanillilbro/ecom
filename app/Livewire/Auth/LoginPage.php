@@ -10,7 +10,7 @@ class LoginPage extends Component
 {
 
     use LivewireAlert;
-    #[Title('Login - Daraz Lite')]
+    #[Title('Login - Prakriti Store')]
 
     public $email;
     public $password;
