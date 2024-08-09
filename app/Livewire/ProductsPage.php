@@ -54,9 +54,14 @@ class ProductsPage extends Component
         //     'timer' => 3000
         //   ]);
         // } else {
-            if (!Auth::check()) {
-                return redirect()->route('login');
-            }
+            // if (!Auth::check()) {
+            //     session(['url.intended' => url()->current()]);
+            //     return redirect()->route('login');
+            // }
+
+        if(!Auth::check()){
+            return redirect()->route('login');
+        }
 
           $total_count = CartManagement::addItemsToCart($product_id);
           $this->dispatch('update-cart-count', total_count:$total_count)->to(Header::class);

@@ -56,6 +56,7 @@ class User extends Authenticatable implements FilamentUser
     {
         $authorizedEmails = [
             'sthaprakrisa@gmail.com',
+            'yohohoho4984@gmail.com',
             'admin@gmail.com',  // Add additional authorized emails here
         ];
 

@@ -69,7 +69,8 @@ class OrderResource extends Resource
                                 'failed' => 'Failed'
                             ])
                             ->default('pending')
-                            ->required(),
+                            ->required()
+                           ,
 
 
                         ToggleButtons::make('status')
@@ -96,7 +97,9 @@ class OrderResource extends Resource
                                 'shipped' => 'heroicon-o-truck',
                                 'delivered' => 'heroicon-o-check-badge',
                                 'canceled' => 'heroicon-o-x-circle'
-                            ]),
+                            ])
+
+                            ,
 
                         Select::make('currency')
                             ->required()
@@ -261,10 +264,10 @@ class OrderResource extends Resource
 
     public static function getNavigationBadgeColor(): string|array|null
     {
-        return static::getmodel()::count() > 10 ? 'success' : 'danger';
+        return static::getmodel()::count() > 10 ? 'danger' : 'success';
     }
 
-
+    protected static ?string $navigationBadgeTooltip = 'Total Orders';
 
     public static function getRelations(): array
     {

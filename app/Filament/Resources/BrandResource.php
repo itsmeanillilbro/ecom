@@ -42,7 +42,9 @@ class BrandResource extends Resource
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('image')
                     ->directory('uploads/brands')
-                    ->image(),
+                    ->image()
+                    ->imageEditor(2)
+                    ->openable(),
                 Forms\Components\Toggle::make('is_active')
                     ->required(),
             ]);

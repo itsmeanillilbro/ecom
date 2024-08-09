@@ -30,8 +30,8 @@ class UserResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                ->required(),
-
+                ->required()
+                ->autofocus(),
                 Forms\Components\TextInput::make('email')
                 ->email()
                 ->required(),
@@ -44,6 +44,7 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('password')
                 ->password()
                 ->required()
+
             ]);
     }
 

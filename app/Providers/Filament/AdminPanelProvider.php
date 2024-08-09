@@ -2,11 +2,14 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\AvatarProviders\AlphacodersAvatarProvider;
+use App\Filament\AvatarProviders\BoringAvatarsProvider;
 use App\Filament\Resources\OrderResource\Widgets\OrderStat;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages;
+use Filament\Pages\Auth\EditProfile;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -53,6 +56,15 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+             ->collapsibleNavigationGroups(true)
+            //  ->topNavigation()
+            ->sidebarWidth('15rem')
+            ->defaultAvatarProvider(AlphacodersAvatarProvider::class)
+
+            ->profile(\App\Filament\Pages\Auth\EditProfile::class)
+            ->profile(isSimple: false)
+            ->spa()
+
             ->authMiddleware([
                 Authenticate::class,
             ]);

@@ -2,6 +2,7 @@
 
 use App\Filament\Resources\ProductResource;
 use App\Helpers\CartManagement;
+use App\Livewire\About;
 use App\Livewire\Auth\ForgotPage;
 use App\Livewire\Auth\LoginPage;
 use App\Livewire\Auth\RegisterPage;
@@ -22,8 +23,10 @@ Route::get('/', HomePage::class);
 
 Route::get('/categories', CategoriesPage::class);
 Route::get('/products', ProductsPage::class);
-Route::get('/products/{slug}', ProductDetailPage::class)->name('products');
+Route::get('/products/{name}', ProductDetailPage::class)->name('products');
 Route::get('/cart', CartPage::class);
+
+Route::get('/about', About::class)->name('about');
 
 Route::middleware('guest')->group(function () {
 
@@ -31,8 +34,6 @@ Route::middleware('guest')->group(function () {
     Route::get('/forgot', ForgotPage::class)->name('password.request');
     Route::get('/register', RegisterPage::class);
     Route::get('/reset/{token}', ResetPasswordPage::class)->name('password.reset');
-
-
 });
 
 

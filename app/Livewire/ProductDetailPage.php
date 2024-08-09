@@ -12,12 +12,12 @@ use Livewire\Component;
 #[Title('Product details - Prakriti Store')]
 class ProductDetailPage extends Component
 {
-    public $slug;
+    public $name;
     use LivewireAlert;
     public $quantity = 1;
-    public function mount($slug)
+    public function mount($name)
     {
-        $this->slug = $slug;
+        $this->name = $name;
     }
 
 
@@ -35,7 +35,7 @@ class ProductDetailPage extends Component
     {
 
         return view('livewire.product-detail-page', [
-            'product' => Product::where('slug', $this->slug)->firstOrFail(),
+            'product' => Product::where('name', $this->name)->firstOrFail(),
 
         ]);
     }

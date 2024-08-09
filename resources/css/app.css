@@ -3,7 +3,7 @@
 @layer base {
     code {
      text-wrap: wrap;
-     color: whitesmoke;
+     /* color: whitesmoke; */
     }
   }
 @tailwind components;

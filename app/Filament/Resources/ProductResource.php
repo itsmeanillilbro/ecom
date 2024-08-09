@@ -71,7 +71,6 @@ class ProductResource extends Resource
                             ->image()
                             ->multiple()
                             ->maxFiles(4)
-
                             ->directory('uploads/products')
                             ->columnSpan(2)
                             ->enableReordering()

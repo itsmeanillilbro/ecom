@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+
     content: [
         "./resources/**/*.blade.php",
         "./resources/**/*.js",
@@ -12,5 +13,6 @@ export default {
         extend: {},
     },
     plugins: [require("preline/plugin")],
+
 };
 

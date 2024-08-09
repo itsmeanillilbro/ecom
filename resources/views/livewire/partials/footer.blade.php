@@ -95,8 +95,7 @@
                 <!-- End Social Brands -->
                 <div class=" sm:flex  items-center mt-4 flex justify-center">
                     <p class="text-md text-gray-400">©<?php echo date('Y') ?> Prakriti's Store. All rights reserved.</p>
-                    <p class="text-md text-gray-400">&nbsp;Made by <a href="https://www.facebook.com/anil.subedi.4984"
-                            class="text-blue-500">Anil</a></p>
+                    <p class="text-md text-gray-400">&nbsp;Made by Anil</p>
                 </div>
             </div>
         </div>
